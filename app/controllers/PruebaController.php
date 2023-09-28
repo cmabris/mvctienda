@@ -6,4 +6,9 @@ class PruebaController
     {
         echo "Estoy en index de prueba";
     }
+
+    public function listado()
+    {
+        echo 'Estoy en el listado de prueba';
+    }
 }

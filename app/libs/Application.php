@@ -11,14 +11,37 @@ class Application
         $url = $this->separarURL();
 
         if ( ! $this->urlController) {
-            require_once '../app/controllers/LoginController.php';
-            $page = new LoginController();
-            $page->index();
+
+            $this->defaultController();
+
         } elseif (file_exists('../app/controllers/' . ucfirst($this->urlController) . 'Controller.php')) {
+
             $controller = ucfirst($this->urlController) . 'Controller';
             require_once '../app/controllers/' . $controller . '.php';
             $this->urlController = new $controller;
-            $this->urlController->index();
+
+            if (method_exists($this->urlController, $this->urlAction) &&
+                is_callable([$this->urlController, $this->urlAction])) {
+
+                if ( ! empty($this->urlParams) ) {
+                    call_user_func_array([$this->urlController, $this->urlAction], $this->urlParams);
+                } else {
+                    $this->urlController->{$this->urlAction}();
+                }
+
+            } else {
+
+                if (strlen($this->urlAction) == 0) {
+                    $this->urlController->index();
+                } else {
+                    header('HTTP/1.0 404 Not Found');
+                }
+
+            }
+        } else {
+
+            $this->defaultController();
+
         }
     }
 
@@ -37,6 +60,13 @@ class Application
             $this->urlParams = array_values($url);
 
         }
+    }
+
+    private function defaultController()
+    {
+        require_once '../app/controllers/LoginController.php';
+        $page = new LoginController();
+        $page->index();
     }
 
 }
