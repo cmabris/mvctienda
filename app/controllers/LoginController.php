@@ -19,4 +19,19 @@ class LoginController extends Controller
         $this->view('login', $data);
     }
 
+    public function registro()
+    {
+        $data = [
+            'title' => 'Registro',
+            'menu' => false,
+        ];
+
+        $this->view('register', $data);
+    }
+
+    public function olvido()
+    {
+        echo "Estoy en el método olvido";
+    }
+
 }
