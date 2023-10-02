@@ -92,7 +92,9 @@ class LoginController extends Controller
                 array_push($errors, 'El correo electrónico no es válido');
             }
             if (count($errors) == 0) {
-                echo "Pasamos a dar de alta los datos en la BD";
+
+                $this->model->createUser($dataForm);
+
             } else {
                 $data = [
                     'title' => 'Registro',
