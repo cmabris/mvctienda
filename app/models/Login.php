@@ -48,4 +48,9 @@ class Login
 
         return $response;
     }
+
+    public function sendEmail($email)
+    {
+        echo $email;
+    }
 }

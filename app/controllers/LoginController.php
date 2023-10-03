@@ -149,7 +149,56 @@ class LoginController extends Controller
 
     public function olvido()
     {
-        echo "Estoy en el método olvido";
+        $errors = [];
+
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+
+            $data = [
+                'title' => 'Olvido de la contraseña',
+                'menu' => false,
+                'errors' => [],
+                'subtitle' => '¿Olvidaste tu contraseña?'
+            ];
+
+            $this->view('olvido', $data);
+
+        } else {
+
+            $email = $_POST['email'] ?? '';
+
+            if ($email == '') {
+                array_push($errors, 'El email es requerido');
+            }
+
+            if ( ! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                array_push($errors, 'El correo electrónico no es válido');
+            }
+
+            if (count($errors) == 0) {
+
+                if ( $this->model->existsEmail($email) ) {
+                    $this->model->sendEmail($email);
+                } else {
+                    array_push($errors, 'El correo electrónico no es válido');
+                }
+
+            }
+
+            if (count($errors) > 0) {
+
+                $data = [
+                    'title' => 'Olvido de la contraseña',
+                    'menu' => false,
+                    'errors' => $errors,
+                    'subtitle' => '¿Olvidaste tu contraseña?'
+                ];
+
+                $this->view('olvido', $data);
+
+            }
+
+
+        }
     }
 
 }
