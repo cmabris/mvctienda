@@ -49,8 +49,30 @@ class Login
         return $response;
     }
 
+    public function getUserByEmail($email)
+    {
+        $sql = 'SELECT * FROM users WHERE email=:email';
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':email' , $email, PDO::PARAM_STR);
+        $query->execute();
+
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
     public function sendEmail($email)
     {
-        echo $email;
+        $user = $this->getUserByEmail($email);
+        $fullname = $user->name . ' ' . $user->last_name_1 . ($user->last_name_2 ? ' ' . $user->last_name_2 : '');
+        $msg = $fullname . ' accede al siguiente enlace para cambiar la contraseña.<br>';
+        $msg .= '<a href="' . ROOT . 'login/changePassword/' . $user->id . '">Cambia tu clave de acceso</a>';
+
+        $headers = 'MIME-Version: 1.0\r\n';
+        $headers .= 'Content-type:text/html; charset=UTF-8\r\n';
+        $headers .= 'FROM: mvctienda\r\n';
+        $headers .= 'Reply-to: admin@mvctienda.local';
+
+        $subject = "Cambiar la contraseña en mvctienda";
+
+        return mail($email, $subject, $msg, $headers);
     }
 }
