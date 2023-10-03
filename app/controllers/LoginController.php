@@ -93,7 +93,11 @@ class LoginController extends Controller
             }
             if (count($errors) == 0) {
 
-                $this->model->createUser($dataForm);
+                if ($this->model->createUser($dataForm)) {
+                    echo 'Usuario insertado correctamente';
+                } else {
+                    echo 'Usuario duplicado o problemas de conexión con la BD';
+                }
 
             } else {
                 $data = [
