@@ -62,7 +62,7 @@ class Login
     public function sendEmail($email)
     {
         $user = $this->getUserByEmail($email);
-        $fullname = $user->name . ' ' . $user->last_name_1 . ($user->last_name_2 ? ' ' . $user->last_name_2 : '');
+        $fullname = $user->first_name . ' ' . $user->last_name_1 . ($user->last_name_2 ? ' ' . $user->last_name_2 : '');
         $msg = $fullname . ' accede al siguiente enlace para cambiar la contraseña.<br>';
         $msg .= '<a href="' . ROOT . 'login/changePassword/' . $user->id . '">Cambia tu clave de acceso</a>';
 

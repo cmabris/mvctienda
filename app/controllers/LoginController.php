@@ -177,7 +177,35 @@ class LoginController extends Controller
             if (count($errors) == 0) {
 
                 if ( $this->model->existsEmail($email) ) {
-                    $this->model->sendEmail($email);
+                    if ($this->model->sendEmail($email)) {
+                        $data = [
+                            'title' => 'Cambio de contraseña',
+                            'menu' => false,
+                            'subtitle' => 'Cambio de contraseña de acceso',
+                            'text' => 'Se ha enviado un correo electrónico a <b>' . $email . '</b> para que pueda cambiar su contraseña. No olvide revisar la carpeta de span.',
+                            'color' => 'alert-success',
+                            'url' => 'login',
+                            'colorButton' => 'btn-success',
+                            'textButton' => 'Regresar',
+                        ];
+
+                        $this->view('mensaje', $data);
+                    } else {
+
+                        $data = [
+                            'title' => 'Error con el correo',
+                            'menu' => false,
+                            'subtitle' => 'Error en el envío del correo electrónico',
+                            'text' => 'Existió un problema al enviar el correo electrónico. Pruebe más tarde o comuníquese con nuestro servicio técnico',
+                            'color' => 'alert-danger',
+                            'url' => 'login',
+                            'colorButton' => 'btn-danger',
+                            'textButton' => 'Regresar',
+                        ];
+
+                        $this->view('mensaje', $data);
+
+                    }
                 } else {
                     array_push($errors, 'El correo electrónico no es válido');
                 }
@@ -199,6 +227,18 @@ class LoginController extends Controller
 
 
         }
+    }
+
+    public function changePassword($data)
+    {
+        $data = [
+            'title' => 'Cambia tu contraseña de acceso',
+            'menu' => false,
+            'data' => $data,
+            'subtitle' => 'Cambia tu contraseña de acceso',
+        ];
+
+        $this->view('changepassword', $data);
     }
 
 }
