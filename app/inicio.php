@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 //Constantes iniciales
 define('ROOT', DIRECTORY_SEPARATOR);
 define('APP', ROOT . 'app' . ROOT);
+define('ENCRIPTKEY', 'elperrodesanroque');
 
 
 //Carga las clases iniciales
