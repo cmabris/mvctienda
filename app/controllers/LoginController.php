@@ -262,7 +262,38 @@ class LoginController extends Controller
                 ];
                 $this->view('changepassword', $dataView);
             } else {
-                
+
+                if ($this->model->changePassword($id, $password1)) {
+
+                    $dataView = [
+                        'title' => 'Modificar la contraseña',
+                        'menu' => false,
+                        'subtitle' => 'Modificación de la contraseña',
+                        'text' => 'La contraseña ha sido cambiada correctamente. Bienvenid@ de nuevo',
+                        'color' => 'alert-success',
+                        'url' => 'login',
+                        'colorButton' => 'btn-success',
+                        'textButton' => 'Regresar',
+                    ];
+
+                    $this->view('mensaje', $dataView);
+
+                } else {
+
+                    $dataView = [
+                        'title' => 'Error al modificar la contraseña',
+                        'menu' => false,
+                        'subtitle' => 'Error al modificar la contraseña',
+                        'text' => 'La contraseña no ha sido cambiada debido a un error interno. Pruebe otra vez en unos minutos',
+                        'color' => 'alert-danger',
+                        'url' => 'login',
+                        'colorButton' => 'btn-danger',
+                        'textButton' => 'Regresar',
+                    ];
+
+                    $this->view('mensaje', $dataView);
+
+                }
             }
 
         } else {

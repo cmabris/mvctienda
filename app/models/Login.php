@@ -75,4 +75,18 @@ class Login
 
         return mail($email, $subject, $msg, $headers);
     }
+
+    public function changePassword($id, $password)
+    {
+        $pass = hash_hmac('sha512', $password, 'elperrodesanroque');
+        $sql = 'UPDATE users SET password=:password WHERE id=:id';
+        $params = [
+            ':id' => $id,
+            ':password' => $pass,
+        ];
+        $query = $this->db->prepare($sql);
+        $response = $query->execute($params);
+
+        return $response;
+    }
 }
