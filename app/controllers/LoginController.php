@@ -11,9 +11,22 @@ class LoginController extends Controller
 
     public function index()
     {
+        if (isset($_COOKIE['shoplogin'])) {
+            $value = explode('|', $_COOKIE['shoplogin']);
+            $dataForm = [
+                'user' => $value[0],
+                'password' => $value[1],
+                'remember' => 'on'
+            ];
+
+        } else {
+            $dataForm = null;
+        }
+
         $data = [
             'title' => 'Login',
             'menu' => false,
+            'data' => $dataForm,
         ];
 
         $this->view('login', $data);
@@ -312,10 +325,19 @@ class LoginController extends Controller
     public function verifyUser()
     {
         $errors = [];
-
+        
         $user = $_POST['user'] ?? '';
         $password = $_POST['password'] ?? '';
         $remember = $_POST['remember'] ?? '';
+
+        $value = $user . '|' . $password;
+        if ($remember == 'on') {
+            $date = time() + (60*60*24*7);
+        } else {
+            $date = time() - 1;
+        }
+
+        setcookie('shoplogin', $value, $date, dirname(__DIR__) . ROOT);
 
         $errors = $this->model->verifyUser($user, $password);
 
