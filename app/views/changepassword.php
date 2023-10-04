@@ -13,6 +13,7 @@
                 <label for="password2">Repite la contraseña:</label>
                 <input type="password2" name="password2" class="form-control">
             </div>
+            <input type="hidden" name="id" value="<?= $data['data'] ?>">
             <div class="form-group text-left">
                 <input type="submit" value="Enviar" class="btn btn-success">
             </div>
