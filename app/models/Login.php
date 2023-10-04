@@ -89,4 +89,21 @@ class Login
 
         return $response;
     }
+
+    public function verifyUser($email, $password)
+    {
+        $errors = [];
+
+        $pass = hash_hmac('sha512', $password, 'elperrodesanroque');
+
+        $user = $this->getUserByEmail($email);
+
+        if ( ! $user ) {
+            array_push($errors, 'El usuario no existe en nuestros registros');
+        } elseif ($user->password != $pass) {
+            array_push($errors, 'La contraseña no es correcta');
+        }
+
+        return $errors;
+    }
 }
