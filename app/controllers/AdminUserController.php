@@ -11,14 +11,25 @@ class AdminUserController extends Controller
 
     public function index()
     {
-        $data = [
-            'title' => 'Administración de usuarios',
-            'menu' => false,
-            'admin' => true,
-            'data' => [],
-        ];
+        $session = new Session();
 
-        $this->view('admin/users/index', $data);
+        if ($session->getLogin()) {
+
+            $data = [
+                'title' => 'Administración de usuarios',
+                'menu' => false,
+                'admin' => true,
+                'data' => [],
+            ];
+
+            $this->view('admin/users/index', $data);
+
+        } else {
+
+            header('location:' . ROOT . 'admin');
+
+        }
+
     }
 
     public function create()
