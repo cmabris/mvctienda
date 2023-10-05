@@ -55,7 +55,11 @@ class AdminUserController extends Controller
 
             if (count($errors) == 0) {
 
-                //Si no hay errores, BD
+                if ($this->model->createAdminUser($dataForm)) {
+
+                } else {
+
+                }
 
             } else {
 
