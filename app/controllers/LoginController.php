@@ -325,7 +325,7 @@ class LoginController extends Controller
     public function verifyUser()
     {
         $errors = [];
-        
+
         $user = $_POST['user'] ?? '';
         $password = $_POST['password'] ?? '';
         $remember = $_POST['remember'] ?? '';
@@ -348,6 +348,11 @@ class LoginController extends Controller
         ];
 
         if ( ! $errors ) {
+
+            $data = $this->model->getUserByEmail($user);
+            $session = new Session();
+            $session->login($data);
+
             header('location:' . ROOT . 'shop');
         } else {
 
@@ -357,7 +362,7 @@ class LoginController extends Controller
                 'errors' => $errors,
                 'data' => $dataForm,
             ];
-
+            $this->view('login', $data);
         }
     }
 }

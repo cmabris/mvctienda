@@ -1,4 +1,11 @@
 <?php include_once 'header.php' ?>
+<?php if(isset($data['errors']) && count($data['errors']) > 0): ?>
+    <div class="alert alert-danger mt-3">
+        <?php foreach ($data['errors'] as $value): ?>
+            <strong><?= $value ?></strong><br>
+        <?php endforeach; ?>
+    </div>
+<?php endif ?>
 <div class="card p-4 bg-light">
     <div class="card-header">
         <h1 class="text-center">Login</h1>
