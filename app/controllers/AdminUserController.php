@@ -13,13 +13,15 @@ class AdminUserController extends Controller
     {
         $session = new Session();
 
+        $users = $this->model->getUsers();
+
         if ($session->getLogin()) {
 
             $data = [
                 'title' => 'Administración de usuarios',
                 'menu' => false,
                 'admin' => true,
-                'data' => [],
+                'data' => $users,
             ];
 
             $this->view('admin/users/index', $data);
