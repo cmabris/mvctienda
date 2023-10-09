@@ -108,4 +108,24 @@ class AdminUser
 
         return $errors;
     }
+
+    public function delete($id)
+    {
+        $errors = [];
+
+        $sql = 'UPDATE admins SET deleted=1, deleted_at=:deleted_at WHERE id=:id';
+
+        $query = $this->db->prepare($sql);
+
+        $params = [
+            ':id' => $id,
+            ':deleted_at' => date('Y-m-d H:i:s'),
+        ];
+
+        if ( ! $query->execute($params) ) {
+            array_push($errors, 'Error al eliminar al usuario');
+        }
+
+        return $errors;
+    }
 }
