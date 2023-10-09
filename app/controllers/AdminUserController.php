@@ -115,9 +115,24 @@ class AdminUserController extends Controller
         }
     }
 
-    public function update()
+    public function update($id)
     {
-        echo 'Modificación de usuarios';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //
+        } else {
+
+            $user = $this->model->getUserById($id);
+
+            $data = [
+                'title' => 'Administración de usuarios - Modificación',
+                'menu' => false,
+                'admin' => true,
+                'data' => $user,
+            ];
+
+            $this->view('admin/users/update', $data);
+        }
+
     }
 
     public function delete()
