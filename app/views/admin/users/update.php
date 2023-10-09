@@ -27,23 +27,23 @@
                        value="<?= $data['data']->email ?? '' ?>">
             </div>
             <div class="form-group text-left mb-2">
-                <label for="password1">Contraseña:</label>
+                <label for="password1">Contraseña: (Dejar en blanco si no desea cambiarla)</label>
                 <input type="password" name="password1"
-                       class="form-control" required
+                       class="form-control"
                        placeholder="Escribe una contraseña">
             </div>
             <div class="form-group text-left mb-2">
                 <label for="password2">Repita la contraseña:</label>
                 <input type="password" name="password2"
-                       class="form-control" required
+                       class="form-control"
                        placeholder="Repite la contraseña">
             </div>
             <div class="form-group">
                 <label for="status">Selecciona el estado</label>
                 <select name="status" id="status" class="form-control">
-                    <option value="" selected>Selecciona el estado del usuario</option>
+                    <option value="">Selecciona el estado del usuario</option>
                     <?php foreach($data['status'] as $status): ?>
-                        <option value="<?= $status->value ?>"><?= $status->description ?></option>
+                        <option value="<?= $status->value ?>" <?= $status->value == $data['data']->status ? 'selected' : '' ?>><?= $status->description ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
