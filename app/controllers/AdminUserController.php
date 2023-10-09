@@ -117,22 +117,15 @@ class AdminUserController extends Controller
 
     public function update($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $errors = [];
 
-            $errors = [];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $name = $_POST['name'] ?? '';
             $email = $_POST['email'] ?? '';
             $password1 = $_POST['password1'] ?? '';
             $password2 = $_POST['password2'] ?? '';
             $status = $_POST['status'] ?? '';
-
-            $dataForm = [
-                'name' => $name,
-                'email' => $email,
-                'password' => $password1,
-                'status' => $status,
-            ];
 
             if (empty($name)) {
                 array_push($errors, 'El nombre de usuario es requerido');
@@ -143,23 +136,44 @@ class AdminUserController extends Controller
             if ($status == '') {
                 array_push($errors, 'Selecciona el estado del usuario');
             }
-            var_dump($dataForm, $errors);
+            if ( ! empty($password1) || ! empty($password2)) {
+                if ($password1 != $password2) {
+                    array_push($errors, 'Las contraseñas no coinciden');
+                }
+            }
 
-        } else {
+            if (empty($errors)) {
 
-            $user = $this->model->getUserById($id);
-            $status = $this->model->getConfig('adminStatus');
+                $data = [
+                    'id' => $id,
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password1,
+                    'status' => $status,
+                ];
+                $errors = $this->model->setUser($data);
 
-            $data = [
-                'title' => 'Administración de usuarios - Modificación',
-                'menu' => false,
-                'admin' => true,
-                'status' => $status,
-                'data' => $user,
-            ];
+                if (empty($errors)) {
+                    header('location:' . ROOT . 'adminuser');
+                }
 
-            $this->view('admin/users/update', $data);
+            }
+
         }
+
+        $user = $this->model->getUserById($id);
+        $status = $this->model->getConfig('adminStatus');
+
+        $data = [
+            'title' => 'Administración de usuarios - Modificación',
+            'menu' => false,
+            'admin' => true,
+            'errors' => $errors,
+            'status' => $status,
+            'data' => $user,
+        ];
+
+        $this->view('admin/users/update', $data);
 
     }
 
