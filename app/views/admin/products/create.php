@@ -24,14 +24,14 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group text-left mb-2">
+            <div class="form-group text-left mt-4">
                 <label for="name">Nombre:</label>
                 <input type="text" name="name" id="name"
                        class="form-control" required
                        placeholder="Escribe el nombre del producto"
                        value="<?= $data['data']['name'] ?? '' ?>">
             </div>
-            <div class="form-group text-left mb-2">
+            <div class="form-group text-left mt-4">
                 <label for="name">Descripción:</label>
                 <input type="text" name="description" id="description"
                        class="form-control" required
@@ -125,18 +125,33 @@
                 <label for="relation1">Producto relacionado</label>
                 <select name="relation1" id="relation1" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
+                    <?php foreach ($data['catalogue'] as $item): ?>
+                        <option value="<?= $item->id ?>">
+                            <?= $item->name ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group text-left">
                 <label for="relation2">Producto relacionado</label>
                 <select name="relation2" id="relation2" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
+                    <?php foreach ($data['catalogue'] as $item): ?>
+                        <option value="<?= $item->id ?>">
+                            <?= $item->name ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group text-left">
                 <label for="relation3">Producto relacionado</label>
                 <select name="relation3" id="relation3" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
+                    <?php foreach ($data['catalogue'] as $item): ?>
+                        <option value="<?= $item->id ?>">
+                            <?= $item->name ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="form-group text-left">
@@ -150,15 +165,17 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="form-group text-left">
-                <label for="mostSold">
-                    <input type="checkbox" name="mostSold" id="mostSold">
+            <div class="form-check text-left">
+                <input type="checkbox" name="mostSold" id="mostSold"
+                       class="form-check-input">
+                <label for="mostSold" class="form-check-label">
                     Producto más vendido
                 </label>
             </div>
-            <div class="form-group text-left">
-                <label for="new">
-                    <input type="checkbox" name="new" id="new">
+            <div class="form-check text-left">
+                <input type="checkbox" name="new" id="new"
+                       class="form-check-input">
+                <label for="new" class="form-check-label">
                     Producto nuevo
                 </label>
             </div>
