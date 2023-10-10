@@ -87,6 +87,7 @@
             <div class="form-group text-left">
                 <label for="price">Precio</label>
                 <input type="text" name="price" id="price"
+                       pattern="^(\d|-)?(\d|,)*\.?\d*$"
                        class="form-control" required
                        placeholder="Escribe el precio del producto sin comas ni símbolos"
                        value="<?= $data['data']['price'] ?? '' ?>">
@@ -94,6 +95,7 @@
             <div class="form-group text-left">
                 <label for="discount">Descuento del producto</label>
                 <input type="text" name="discount" id="discount"
+                       pattern="^(\d|-)?(\d|,)*\.?\d*$"
                        class="form-control" required
                        placeholder="Escribe el descuento del producto sin comas ni símbolos"
                        value="<?= $data['data']['discount'] ?? '' ?>">
@@ -101,6 +103,7 @@
             <div class="form-group text-left">
                 <label for="envio">Coste del envío del producto</label>
                 <input type="text" name="envio" id="envio"
+                       pattern="^(\d|-)?(\d|,)*\.?\d*$"
                        class="form-control" required
                        placeholder="Escribe el coste del envío del producto sin comas ni símbolos"
                        value="<?= $data['data']['envio'] ?? '' ?>">
