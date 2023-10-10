@@ -1,4 +1,5 @@
 <?php include_once (VIEWS . 'header.php') ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 <script src="<?= ROOT ?>js/adminCreateProduct.js"></script>
 <?php if(isset($data['errors']) && count($data['errors']) > 0): ?>
     <div class="alert alert-danger mt-3">
@@ -33,10 +34,7 @@
             </div>
             <div class="form-group text-left mt-4">
                 <label for="name">Descripción:</label>
-                <input type="text" name="description" id="description"
-                       class="form-control" required
-                       placeholder="Escribe una descripción del producto"
-                       value="<?= $data['data']['description'] ?? '' ?>">
+                <textarea name="description" id="editor"></textarea>
             </div>
             <div id="book">
                 <div class="form-group text-left">
@@ -187,3 +185,13 @@
     </div>
 </div>
 <?php include_once (VIEWS . 'footer.php') ?>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            console.log( editor );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
