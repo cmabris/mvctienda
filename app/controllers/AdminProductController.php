@@ -15,11 +15,13 @@ class AdminProductController extends Controller
 
         if ($session->getLogin()) {
             $products = $this->model->getProducts();
+            $type = $this->model->getConfig('productType');
 
             $data = [
                 'title' => 'Administración de Productos',
                 'menu' => false,
                 'admin' => true,
+                'type' => $type,
                 'data' => $products,
             ];
 
@@ -31,7 +33,14 @@ class AdminProductController extends Controller
 
     public function create()
     {
+        $data = [
+            'title' => 'Administración de Productos - Alta',
+            'menu' => false,
+            'admin' => true,
+            'data' => [],
+        ];
 
+        $this->view('admin/products/create', $data);
     }
 
     public function update($id)
