@@ -1,4 +1,5 @@
 <?php include_once (VIEWS . 'header.php') ?>
+<script src="<?= ROOT ?>js/adminCreateProduct.js"></script>
 <?php if(isset($data['errors']) && count($data['errors']) > 0): ?>
     <div class="alert alert-danger mt-3">
         <?php foreach ($data['errors'] as $value): ?>
@@ -12,12 +13,144 @@
     </div>
     <div class="card-body">
         <form action="<?= ROOT ?>adminProduct/create" method="POST">
+            <div class="form-control text-left">
+                <label for="type">Tipo de producto</label>
+                <select name="type" id="type" class="form-control">
+                    <option value="">Selecciona el tipo de producto</option>
+                    <?php foreach ($data['type'] as $type): ?>
+                        <option value="<?= $type->value ?>">
+                            <?= $type->description ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
             <div class="form-group text-left mb-2">
-                <label for="name">Usuario:</label>
+                <label for="name">Nombre:</label>
                 <input type="text" name="name" id="name"
                        class="form-control" required
-                       placeholder="Escribe el nombre completo"
+                       placeholder="Escribe el nombre del producto"
                        value="<?= $data['data']['name'] ?? '' ?>">
+            </div>
+            <div class="form-group text-left mb-2">
+                <label for="name">Descripción:</label>
+                <input type="text" name="description" id="description"
+                       class="form-control" required
+                       placeholder="Escribe una descripción del producto"
+                       value="<?= $data['data']['description'] ?? '' ?>">
+            </div>
+            <div id="book">
+                <div class="form-group text-left">
+                    <label for="author">Autor</label>
+                    <input type="text" name="author" id="author"
+                           class="form-control" required
+                           placeholder="Escribe el autor del libro"
+                           value="<?= $data['data']['author'] ?? '' ?>">
+                </div>
+                <div class="form-group text-left">
+                    <label for="publisher">Editorial</label>
+                    <input type="text" name="publisher" id="publisher"
+                           class="form-control" required
+                           placeholder="Escribe la editorial del libro"
+                           value="<?= $data['data']['publisher'] ?? '' ?>">
+                </div>
+                <div class="form-group text-left">
+                    <label for="pages">Páginas</label>
+                    <input type="text" name="pages" id="pages"
+                           class="form-control" required
+                           placeholder="Escribe el número de páginas del libro"
+                           value="<?= $data['data']['pages'] ?? '' ?>">
+                </div>
+            </div>
+            <div id="course">
+                <div class="form-group text-left">
+                    <label for="people">Público objetivo</label>
+                    <input type="text" name="people" id="people"
+                           class="form-control" required
+                           placeholder="Escribe el público objetivo del curso"
+                           value="<?= $data['data']['people'] ?? '' ?>">
+                </div>
+                <div class="form-group text-left">
+                    <label for="objetives">Objetivos</label>
+                    <input type="text" name="objetives" id="objetives"
+                           class="form-control" required
+                           placeholder="Escribe los objetivos del curso"
+                           value="<?= $data['data']['objetives'] ?? '' ?>">
+                </div>
+                <div class="form-group text-left">
+                    <label for="necesites">Conocimientos necesarios previos</label>
+                    <input type="text" name="necesites" id="necesites"
+                           class="form-control" required
+                           placeholder="Escribe el número de páginas del libro"
+                           value="<?= $data['data']['necesites'] ?? '' ?>">
+                </div>
+            </div>
+            <div class="form-group text-left">
+                <label for="price">Precio</label>
+                <input type="text" name="price" id="price"
+                       class="form-control" required
+                       placeholder="Escribe el precio del producto sin comas ni símbolos"
+                       value="<?= $data['data']['price'] ?? '' ?>">
+            </div>
+            <div class="form-group text-left">
+                <label for="discount">Descuento del producto</label>
+                <input type="text" name="discount" id="discount"
+                       class="form-control" required
+                       placeholder="Escribe el descuento del producto sin comas ni símbolos"
+                       value="<?= $data['data']['discount'] ?? '' ?>">
+            </div>
+            <div class="form-group text-left">
+                <label for="envio">Coste del envío del producto</label>
+                <input type="text" name="envio" id="envio"
+                       class="form-control" required
+                       placeholder="Escribe el coste del envío del producto sin comas ni símbolos"
+                       value="<?= $data['data']['envio'] ?? '' ?>">
+            </div>
+            <div class="form-group text-left">
+                <label for="image">Imagen del producto</label>
+                <input type="file" name="image" id="image" class="form-control">
+            </div>
+            <div class="form-group text-left">
+                <label for="published">Fecha del producto</label>
+                <input type="date" name="published" id="published"
+                       class="form-control" required
+                       placeholder="Fecha de creación o publicación del producto (AAAA-MM-DD)"
+                       value="<?= $data['data']['published'] ?? '' ?>">
+            </div>
+            <div class="form-group text-left">
+                <label for="relation1">Producto relacionado</label>
+                <select name="relation1" id="relation1" class="form-control">
+                    <option value="">Selecciona un producto relacionado</option>
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="relation2">Producto relacionado</label>
+                <select name="relation2" id="relation2" class="form-control">
+                    <option value="">Selecciona un producto relacionado</option>
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="relation3">Producto relacionado</label>
+                <select name="relation3" id="relation3" class="form-control">
+                    <option value="">Selecciona un producto relacionado</option>
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="status">Estado del producto</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="void">Selecciona el estado del producto</option>
+                </select>
+            </div>
+            <div class="form-group text-left">
+                <label for="mostSold">
+                    <input type="checkbox" name="mostSold" id="mostSold">
+                    Producto más vendido
+                </label>
+            </div>
+            <div class="form-group text-left">
+                <label for="new">
+                    <input type="checkbox" name="new" id="new">
+                    Producto nuevo
+                </label>
             </div>
             <div class="form-group text-left">
                 <input type="submit" value="Crear producto" class="btn btn-success">
