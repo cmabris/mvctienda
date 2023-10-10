@@ -43,8 +43,8 @@ class AdminProductController extends Controller
 
             //Recibimos la información
             $type = $_POST['type'] ?? '';
-            $name = $_POST['name'] ?? '';
-            $description = $_POST['description'] ?? '';
+            $name = addslashes(htmlentities($_POST['name'] ?? ''));
+            $description = addslashes(htmlentities($_POST['description'] ?? ''));
             $price = $_POST['price'] ?? '';
             $discount = $_POST['discount'] ?? '0';
             $send = $_POST['send'] ?? '0';
@@ -57,17 +57,55 @@ class AdminProductController extends Controller
             $new = $_POST['new'] ?? '';
             $status = $_POST['status'] ?? '';
             //Books
-            $author = $_POST['author'] ?? '';
-            $publisher = $_POST['publisher'] ?? '';
+            $author = addslashes(htmlentities($_POST['author'] ?? ''));
+            $publisher = addslashes(htmlentities($_POST['publisher'] ?? ''));
             $pages = $_POST['pages'] ?? '';
             //Courses
-            $people = $_POST['people'] ?? '';
-            $objetives = $_POST['objetives'] ?? '';
-            $necesites = $_POST['necesites'] ?? '';
+            $people = addslashes(htmlentities($_POST['people'] ?? ''));
+            $objetives = addslashes(htmlentities($_POST['objetives'] ?? ''));
+            $necesites = addslashes(htmlentities($_POST['necesites'] ?? ''));
 
             //Validamos la información
+            if (empty($name)) {
+                array_push($errors, 'El nombre del producto es requerido');
+            }
+            if (empty($description)) {
+                array_push($errors, 'La descripción del producto es requerida');
+            }
+            if ($type == 1) {
+                if (empty($people)) {
+                    array_push($errors, 'El público objetivo es requerido');
+                }
+                if (empty($objetives)) {
+                    array_push($errors, 'Los objetivos del curso son requeridos');
+                }
+                if (empty($necesites)) {
+                    array_push($errors, 'Los requisitos del curso son necesarios');
+                }
+            } elseif ($type == 2) {
+                if (empty($author)) {
+                    array_push($errors, 'El autor del libro es requerido');
+                }
+                if (empty($publisher)) {
+                    array_push($errors, 'La editorial del libro es requerida');
+                }
+            } else {
+                array_push($errors, 'Debes seleccionar un tipo válido');
+            }
 
             //Creamos el array de datos
+            $dataForm = [
+                'type' => $type,
+                'name' => $name,
+                'description' => $description,
+                'author' => $author,
+                'publisher' => $publisher,
+                'people' => $people,
+                'objetives' => $objetives,
+                'necesites' => $necesites,
+            ];
+
+            var_dump($dataForm);
 
             if (empty($errors)) {
                 //Enviar la información al modelo
