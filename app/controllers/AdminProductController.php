@@ -45,9 +45,9 @@ class AdminProductController extends Controller
             $type = $_POST['type'] ?? '';
             $name = addslashes(htmlentities($_POST['name'] ?? ''));
             $description = addslashes(htmlentities($_POST['description'] ?? ''));
-            $price = $_POST['price'] ?? '';
-            $discount = $_POST['discount'] ?? '0';
-            $send = $_POST['send'] ?? '0';
+            $price = Validate::number($_POST['price'] ?? '');
+            $discount = Validate::number($_POST['discount'] ?? '0');
+            $send = Validate::number($_POST['send'] ?? '0');
             $image = $_FILES['image']['name'];
             $published = $_POST['published'] ?? '';
             $relation1 = $_POST['relation1'] != '' ? $_POST['relation1'] : 0;
@@ -59,7 +59,7 @@ class AdminProductController extends Controller
             //Books
             $author = addslashes(htmlentities($_POST['author'] ?? ''));
             $publisher = addslashes(htmlentities($_POST['publisher'] ?? ''));
-            $pages = $_POST['pages'] ?? '';
+            $pages = Validate::number($_POST['pages'] ?? '');
             //Courses
             $people = addslashes(htmlentities($_POST['people'] ?? ''));
             $objetives = addslashes(htmlentities($_POST['objetives'] ?? ''));
@@ -71,6 +71,21 @@ class AdminProductController extends Controller
             }
             if (empty($description)) {
                 array_push($errors, 'La descripción del producto es requerida');
+            }
+            if ( ! is_numeric($price)) {
+                array_push($errors, 'El precio del producto debe ser un número');
+            }
+            if ( ! is_numeric($discount)) {
+                array_push($errors, 'El descuento del producto debe ser un número');
+            }
+            if ( ! is_numeric($send)) {
+                array_push($errors, 'Los gastos de envío del producto deben ser un número');
+            }
+            if (is_numeric($price) && is_numeric($discount) && $price < $discount) {
+                array_push($errors, 'El descuento no puede ser mayor que el precio');
+            }
+            if ( ! is_numeric($pages)) {
+                $pages = 0;
             }
             if ($type == 1) {
                 if (empty($people)) {
@@ -98,8 +113,12 @@ class AdminProductController extends Controller
                 'type' => $type,
                 'name' => $name,
                 'description' => $description,
+                'price' => $price,
+                'discount' => $discount,
+                'send' => $send,
                 'author' => $author,
                 'publisher' => $publisher,
+                'pages' => $pages,
                 'people' => $people,
                 'objetives' => $objetives,
                 'necesites' => $necesites,
