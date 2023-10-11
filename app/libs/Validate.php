@@ -32,4 +32,25 @@ class Validate
         $file = str_replace($search, $replace, $string);
         return $file;
     }
+
+    public static function resizeImage($image, $newWidth)
+    {
+        $file = 'img' . ROOT . $image;
+
+        $info = getimagesize($file);
+
+        $width = $info[0];
+        $heigth = $info[1];
+        $type = $info['mime'];
+
+        $factor = $newWidth / $width;
+        $newHeigth = $factor * $heigth;
+
+        $image = imagecreatefromjpeg($file);
+        $canvas = imagecreatetruecolor($newWidth, $newHeigth);
+
+        imagecopyresampled($canvas, $image, 0,0,0,0, $newWidth, $newHeigth, $width, $heigth);
+
+        imagejpeg($canvas, $file, 80);
+    }
 }

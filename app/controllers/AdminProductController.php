@@ -118,6 +118,7 @@ class AdminProductController extends Controller
 
             if (is_uploaded_file($_FILES['image']['tmp_name'])) {
                 move_uploaded_file($_FILES['image']['tmp_name'], 'img' . ROOT . $image);
+                Validate::resizeImage($image, 240);
             } else {
                 array_push($errors, 'Error al subir la imagen');
             }
