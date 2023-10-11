@@ -113,18 +113,22 @@ class AdminProductController extends Controller
                 array_push($errors, 'La fecha de publicación no puede ser posterior a hoy');
             }
 
-            if (Validate::imageFile($_FILES['image']['tmp_name'])) {
-                //Comenzamos a tratar la imagen una vez validad
-                $image = strtolower($image);
+            if ($image) {
+                if (Validate::imageFile($_FILES['image']['tmp_name'])) {
+                    //Comenzamos a tratar la imagen una vez validad
+                    $image = strtolower($image);
 
-                if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-                    move_uploaded_file($_FILES['image']['tmp_name'], 'img' . ROOT . $image);
-                    Validate::resizeImage($image, 240);
+                    if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                        move_uploaded_file($_FILES['image']['tmp_name'], 'img' . ROOT . $image);
+                        Validate::resizeImage($image, 240);
+                    } else {
+                        array_push($errors, 'Error al subir la imagen');
+                    }
                 } else {
-                    array_push($errors, 'Error al subir la imagen');
+                    array_push($errors, 'El formato de imagen no es aceptado');
                 }
             } else {
-                array_push($errors, 'El formato de imagen no es aceptado');
+                array_push($errors, 'No he recibido la imagen');
             }
 
 
