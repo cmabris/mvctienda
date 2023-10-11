@@ -113,6 +113,15 @@ class AdminProductController extends Controller
                 array_push($errors, 'La fecha de publicación no puede ser posterior a hoy');
             }
 
+            //Comenzamos a tratar la imagen una vez validad
+            $image = strtolower($image);
+
+            if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+                move_uploaded_file($_FILES['image']['tmp_name'], 'img' . ROOT . $image);
+            } else {
+                array_push($errors, 'Error al subir la imagen');
+            }
+
 
             //Creamos el array de datos
             $dataForm = [
