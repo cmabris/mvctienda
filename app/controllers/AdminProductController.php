@@ -48,13 +48,13 @@ class AdminProductController extends Controller
             $price = Validate::number($_POST['price'] ?? '');
             $discount = Validate::number($_POST['discount'] ?? '0');
             $send = Validate::number($_POST['envio'] ?? '0');
-            $image = $_FILES['image']['name'];
+            $image = Validate::file($_FILES['image']['name']);
             $published = $_POST['published'] ?? '';
             $relation1 = $_POST['relation1'] != '' ? $_POST['relation1'] : 0;
             $relation2 = $_POST['relation2'] != '' ? $_POST['relation2'] : 0;
             $relation3 = $_POST['relation3'] != '' ? $_POST['relation3'] : 0;
-            $mostSold = $_POST['mostSold'] ?? '';
-            $new = $_POST['new'] ?? '';
+            $mostSold = isset($_POST['mostSold']) ? '1' : '0';
+            $new = isset($_POST['new']) ? '1' : '0';
             $status = $_POST['status'] ?? '';
             //Books
             $author = addslashes(htmlentities($_POST['author'] ?? ''));
@@ -128,6 +128,9 @@ class AdminProductController extends Controller
                 'people' => $people,
                 'objetives' => $objetives,
                 'necesites' => $necesites,
+                'mostSold' => $mostSold,
+                'new' => $new,
+                'image' => $image,
             ];
 
             var_dump($dataForm);
