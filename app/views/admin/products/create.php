@@ -40,21 +40,21 @@
                 <div class="form-group text-left">
                     <label for="author">Autor</label>
                     <input type="text" name="author" id="author"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe el autor del libro"
                            value="<?= $data['data']['author'] ?? '' ?>">
                 </div>
                 <div class="form-group text-left">
                     <label for="publisher">Editorial</label>
                     <input type="text" name="publisher" id="publisher"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe la editorial del libro"
                            value="<?= $data['data']['publisher'] ?? '' ?>">
                 </div>
                 <div class="form-group text-left">
                     <label for="pages">Páginas</label>
                     <input type="text" name="pages" id="pages"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe el número de páginas del libro"
                            value="<?= $data['data']['pages'] ?? '' ?>">
                 </div>
@@ -63,21 +63,21 @@
                 <div class="form-group text-left">
                     <label for="people">Público objetivo</label>
                     <input type="text" name="people" id="people"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe el público objetivo del curso"
                            value="<?= $data['data']['people'] ?? '' ?>">
                 </div>
                 <div class="form-group text-left">
                     <label for="objetives">Objetivos</label>
                     <input type="text" name="objetives" id="objetives"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe los objetivos del curso"
                            value="<?= $data['data']['objetives'] ?? '' ?>">
                 </div>
                 <div class="form-group text-left">
                     <label for="necesites">Conocimientos necesarios previos</label>
                     <input type="text" name="necesites" id="necesites"
-                           class="form-control" required
+                           class="form-control"
                            placeholder="Escribe el número de páginas del libro"
                            value="<?= $data['data']['necesites'] ?? '' ?>">
                 </div>

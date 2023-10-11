@@ -47,7 +47,7 @@ class AdminProductController extends Controller
             $description = addslashes(htmlentities($_POST['description'] ?? ''));
             $price = Validate::number($_POST['price'] ?? '');
             $discount = Validate::number($_POST['discount'] ?? '0');
-            $send = Validate::number($_POST['send'] ?? '0');
+            $send = Validate::number($_POST['envio'] ?? '0');
             $image = $_FILES['image']['name'];
             $published = $_POST['published'] ?? '';
             $relation1 = $_POST['relation1'] != '' ? $_POST['relation1'] : 0;
@@ -107,6 +107,12 @@ class AdminProductController extends Controller
             } else {
                 array_push($errors, 'Debes seleccionar un tipo válido');
             }
+            if ( ! Validate::date($published) ) {
+                array_push($errors, 'La fecha o su formato no son correctos');
+            } elseif (Validate::dateDif($published)) {
+                array_push($errors, 'La fecha de publicación no puede ser posterior a hoy');
+            }
+
 
             //Creamos el array de datos
             $dataForm = [
