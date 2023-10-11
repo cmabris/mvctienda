@@ -44,7 +44,7 @@ class Validate
         $type = $info['mime'];
 
         $factor = $newWidth / $width;
-        $newHeigth = $factor * $heigth;
+        $newHeigth = (int) ($factor * $heigth);
 
         $image = imagecreatefromjpeg($file);
         $canvas = imagecreatetruecolor($newWidth, $newHeigth);
@@ -52,5 +52,22 @@ class Validate
         imagecopyresampled($canvas, $image, 0,0,0,0, $newWidth, $newHeigth, $width, $heigth);
 
         imagejpeg($canvas, $file, 80);
+    }
+
+    public static function imageFile($file)
+    {
+        $imageArray = getimagesize($file);
+
+        $imageType = $imageArray[2];
+
+        return (bool) (in_array($imageType, [IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF]));
+    }
+
+    public static function text($string)
+    {
+        $search = ['^', 'delete', 'drop', 'truncate', 'exec', 'system'];
+        $replace = ['-', 'dele*te', 'dr*op', 'trunca*te', 'ex*ec', 'syst*em'];
+        $string = str_replace($search, $replace, $string);
+        $string = addslashes(htmlentities($string));
     }
 }
