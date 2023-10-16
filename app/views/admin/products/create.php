@@ -19,7 +19,8 @@
                 <select name="type" id="type" class="form-control">
                     <option value="">Selecciona el tipo de producto</option>
                     <?php foreach ($data['type'] as $type): ?>
-                        <option value="<?= $type->value ?>">
+                        <option value="<?= $type->value ?>"
+                            <?= isset($data['data']['type']) && $data['data']['type'] == $type->value ? 'selected' : '' ?>>
                             <?= $type->description ?>
                         </option>
                     <?php endforeach; ?>
@@ -34,7 +35,7 @@
             </div>
             <div class="form-group text-left mt-4">
                 <label for="name">Descripción:</label>
-                <textarea name="description" id="editor"></textarea>
+                <textarea name="description" id="editor"><?= $data['data']['description'] ?? '' ?></textarea>
             </div>
             <div id="book">
                 <div class="form-group text-left">
@@ -104,7 +105,7 @@
                        pattern="^(\d|-)?(\d|,)*\.?\d*$"
                        class="form-control" required
                        placeholder="Escribe el coste del envío del producto sin comas ni símbolos"
-                       value="<?= $data['data']['envio'] ?? '' ?>">
+                       value="<?= $data['data']['send'] ?? '' ?>">
             </div>
             <div class="form-group text-left">
                 <label for="image">Imagen del producto</label>
@@ -115,7 +116,7 @@
             <div class="form-group text-left">
                 <label for="published">Fecha del producto</label>
                 <input type="date" name="published" id="published"
-                       class="form-control" required
+                       class="form-control"
                        placeholder="Fecha de creación o publicación del producto (AAAA-MM-DD)"
                        value="<?= $data['data']['published'] ?? '' ?>">
             </div>
@@ -124,7 +125,8 @@
                 <select name="relation1" id="relation1" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
-                        <option value="<?= $item->id ?>">
+                        <option value="<?= $item->id ?>"
+                            <?= isset($data['data']['relation1']) && $data['data']['relation1'] == $item->value ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>
@@ -135,7 +137,8 @@
                 <select name="relation2" id="relation2" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
-                        <option value="<?= $item->id ?>">
+                        <option value="<?= $item->id ?>"
+                            <?= isset($data['data']['relation2']) && $data['data']['relation2'] == $item->value ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>
@@ -146,7 +149,8 @@
                 <select name="relation3" id="relation3" class="form-control">
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
-                        <option value="<?= $item->id ?>">
+                        <option value="<?= $item->id ?>"
+                            <?= isset($data['data']['relation3']) && $data['data']['relation3'] == $item->value ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>
@@ -157,7 +161,8 @@
                 <select name="status" id="status" class="form-control">
                     <option value="void">Selecciona el estado del producto</option>
                     <?php foreach ($data['status'] as $status): ?>
-                        <option value="<?= $status->value ?>">
+                        <option value="<?= $status->value ?>"
+                            <?= isset($data['data']['status']) && $data['data']['status'] == $status->value ? 'selected' : '' ?>>
                             <?= $status->description ?>
                         </option>
                     <?php endforeach; ?>
@@ -165,6 +170,7 @@
             </div>
             <div class="form-check text-left">
                 <input type="checkbox" name="mostSold" id="mostSold"
+                    <?= isset($data['data']['mostSold']) && $data['data']['mostSold'] == '1' ? 'checked' : '' ?>
                        class="form-check-input">
                 <label for="mostSold" class="form-check-label">
                     Producto más vendido
@@ -172,6 +178,7 @@
             </div>
             <div class="form-check text-left">
                 <input type="checkbox" name="new" id="new"
+                    <?= isset($data['data']['new']) && $data['data']['new'] == '1' ? 'checked' : '' ?>
                        class="form-check-input">
                 <label for="new" class="form-check-label">
                     Producto nuevo

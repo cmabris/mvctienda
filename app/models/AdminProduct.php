@@ -38,8 +38,8 @@ class AdminProduct
 
     public function createProduct($data)
     {
-        $sql = 'INSERT INTO products(type, name, description, price, discount, send, image, published, relation1, relation2, relation3, mostSold, new, status, deleted, create_at, updated_at, deleted_at, author, publisher, pages, people, objetives, necesites) 
-                VALUES (:type, :name, :description, :price, :discount, :send, :image, :published, :relation1, :relation2, :relation3, :mostSold, :new, :status, :deleted, :create_at, :updated_at, :deleted_at, :author, :publisher, :pages, :people, :objetives, :necesites)';
+        $sql = 'INSERT INTO products(type, name, description, price, discount, send, image, published, relation1, relation2, relation3, mostSold, new, status, deleted, created_at, updated_at, deleted_at, author, publisher, pages, people, objetives, necesites) 
+                VALUES (:type, :name, :description, :price, :discount, :send, :image, :published, :relation1, :relation2, :relation3, :mostSold, :new, :status, :deleted, :created_at, :updated_at, :deleted_at, :author, :publisher, :pages, :people, :objetives, :necesites)';
 
         $params = [
             ':type' => $data['type'],
@@ -57,7 +57,7 @@ class AdminProduct
             ':new' => $data['new'],
             ':status' => $data['status'],
             ':deleted' => 0,
-            ':create_at' => date('Y-m-d H:i:s'),
+            ':created_at' => date('Y-m-d H:i:s'),
             ':updated_at' => null,
             ':deleted_at' => null,
             ':author' => $data['author'],

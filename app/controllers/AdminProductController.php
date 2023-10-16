@@ -35,8 +35,8 @@ class AdminProductController extends Controller
     {
         $errors = [];
         $dataForm = [];
-        $type = $this->model->getConfig('productType');
-        $status = $this->model->getConfig('productStatus');
+        $typeConfig = $this->model->getConfig('productType');
+        $statusConfig = $this->model->getConfig('productStatus');
         $catalogue = $this->model->getCatalogue();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -131,7 +131,6 @@ class AdminProductController extends Controller
                 array_push($errors, 'No he recibido la imagen');
             }
 
-
             //Creamos el array de datos
             $dataForm = [
                 'type' => $type,
@@ -140,6 +139,8 @@ class AdminProductController extends Controller
                 'price' => $price,
                 'discount' => $discount,
                 'send' => $send,
+                'image' => $image,
+                'published' => $published,
                 'author' => $author,
                 'publisher' => $publisher,
                 'pages' => $pages,
@@ -148,7 +149,6 @@ class AdminProductController extends Controller
                 'necesites' => $necesites,
                 'mostSold' => $mostSold,
                 'new' => $new,
-                'image' => $image,
                 'relation1' => $relation1,
                 'relation2' => $relation2,
                 'relation3' => $relation3,
@@ -157,9 +157,8 @@ class AdminProductController extends Controller
 
             if (empty($errors)) {
                 //Enviar la información al modelo
-                $errors = $this->model->createProduct($dataForm);
 
-                if (empty($errors)) {
+                if ($this->model->createProduct($dataForm)) {
                     //Redirigimos al index de productos
                     header('location:' . ROOT . 'adminProduct');
                 }
@@ -172,8 +171,8 @@ class AdminProductController extends Controller
             'menu' => false,
             'admin' => true,
             'errors' => $errors,
-            'type' => $type,
-            'status' => $status,
+            'type' => $typeConfig,
+            'status' => $statusConfig,
             'catalogue' => $catalogue,
             'data' => $dataForm,
         ];

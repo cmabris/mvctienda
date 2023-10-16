@@ -14,6 +14,11 @@ class Validate
     public static function date($string)
     {
         $date = explode('-', $string);
+
+        if (count($date) == 1) {
+            return false;
+        }
+
         return checkdate($date[1], $date[2], $date[0]);
     }
 
@@ -69,5 +74,7 @@ class Validate
         $replace = ['-', 'dele*te', 'dr*op', 'trunca*te', 'ex*ec', 'syst*em'];
         $string = str_replace($search, $replace, $string);
         $string = addslashes(htmlentities($string));
+
+        return $string;
     }
 }
