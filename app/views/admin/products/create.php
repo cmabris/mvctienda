@@ -126,7 +126,7 @@
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
                         <option value="<?= $item->id ?>"
-                            <?= isset($data['data']['relation1']) && $data['data']['relation1'] == $item->value ? 'selected' : '' ?>>
+                            <?= isset($data['data']['relation1']) && $data['data']['relation1'] == $item->id ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>
@@ -138,7 +138,7 @@
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
                         <option value="<?= $item->id ?>"
-                            <?= isset($data['data']['relation2']) && $data['data']['relation2'] == $item->value ? 'selected' : '' ?>>
+                            <?= isset($data['data']['relation2']) && $data['data']['relation2'] == $item->id ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>
@@ -150,7 +150,7 @@
                     <option value="">Selecciona un producto relacionado</option>
                     <?php foreach ($data['catalogue'] as $item): ?>
                         <option value="<?= $item->id ?>"
-                            <?= isset($data['data']['relation3']) && $data['data']['relation3'] == $item->value ? 'selected' : '' ?>>
+                            <?= isset($data['data']['relation3']) && $data['data']['relation3'] == $item->id ? 'selected' : '' ?>>
                             <?= $item->name ?>
                         </option>
                     <?php endforeach; ?>

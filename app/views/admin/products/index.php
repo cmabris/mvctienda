@@ -17,9 +17,9 @@
             <?php foreach ($data['data'] as $product): ?>
                 <tr>
                     <td><?= $product->id ?></td>
-                    <td><?= $product->type ?></td>
+                    <td><?= $data['type'][$product->type - 1]->description ?></td>
                     <td><?= $product->name ?></td>
-                    <td><?= $product->description ?></td>
+                    <td><?= html_entity_decode($product->description) ?></td>
                     <td><a href="<?= ROOT ?>adminproduct/update/<?= $product->id ?>" class="btn btn-info">Modificar</a></td>
                     <td><a href="<?= ROOT ?>adminproduct/delete/<?= $product->id ?>" class="btn btn-danger">Borrar</a></td>
                 </tr>
