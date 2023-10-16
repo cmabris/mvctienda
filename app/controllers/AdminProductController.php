@@ -332,6 +332,29 @@ class AdminProductController extends Controller
 
     public function delete($id)
     {
+        $errors = [];
 
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $errors = $this->model->delete($id);
+
+            if (empty($errors)) {
+                header('location:' . ROOT . 'adminProduct');
+            }
+        }
+
+        $product = $this->model->getProductById($id);
+
+        $typeConfig = $this->model->getConfig('productType');
+
+        $data = [
+            'title' => 'Administración de Productos - Eliminación',
+            'menu'=> false,
+            'admin' => true,
+            'type' => $typeConfig,
+            'product' => $product,
+            'errors' => $errors,
+        ];
+
+        $this->view('admin/products/delete', $data);
     }
 }

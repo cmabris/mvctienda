@@ -127,6 +127,25 @@ class AdminProduct
         }
 
         return $errors;
+    }
 
+    public function delete($id)
+    {
+        $errors = [];
+
+        $sql = 'UPDATE products SET deleted=1, deleted_at=:deleted_at WHERE id=:id';
+
+        $params = [
+            ':id' => $id,
+            ':deleted_at' => date('Y-m-d H:i:s'),
+        ];
+
+        $query = $this->db->prepare($sql);
+
+        if ( ! $query->execute($params)) {
+            array_push($errors, 'Error al borrar el producto');
+        }
+
+        return $errors;
     }
 }
