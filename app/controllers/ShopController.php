@@ -26,4 +26,11 @@ class ShopController extends Controller
             header('location:' . ROOT);
         }
     }
+
+    public function logout()
+    {
+        $session = new Session();
+        $session->logout();
+        header('location:' . ROOT);
+    }
 }
