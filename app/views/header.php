@@ -15,7 +15,29 @@
     <a href="<?= ROOT ?>index.php" class="navbar-brand">Tienda</a>
     <div class="collapse navbar-collapse" id="menu">
         <?php if ($data['menu']): ?>
-
+            <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a href="<?= ROOT . 'courses' ?>" class="nav-link
+                    <?= (isset($data['active']) && $data['active'] == 'courses') ? 'active' : '' ?>">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= ROOT . 'books' ?>" class="nav-link
+                    <?= (isset($data['active']) && $data['active'] == 'books') ? 'active' : '' ?>">Libros</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= ROOT . 'shop/whoami' ?>" class="nav-link
+                    <?= (isset($data['active']) && $data['active'] == 'whoami') ? 'active' : '' ?>">Quienes somos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= ROOT . 'shop/contact' ?>" class="nav-link
+                    <?= (isset($data['active']) && $data['active'] == 'contact') ? 'active' : '' ?>">Contacto</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a href="<?= ROOT . 'shop/logout' ?>" class="nav-link">Salir</a>
+                </li>
+            </ul>
         <?php endif; ?>
         <?php if (isset($data['admin']) && $data['admin']): ?>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">

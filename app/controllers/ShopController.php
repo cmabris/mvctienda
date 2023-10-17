@@ -16,7 +16,9 @@ class ShopController extends Controller
         if ($session->getLogin()) {
             $data = [
                 'title' => 'Bienvenid@ a nuestra exclusiva tienda de productos',
-                'menu' => false,
+                'menu' => true,
+                'subtitle' => 'Bienvenid@ a nuestra tienda',
+                'active' => 'books'
             ];
 
             $this->view('shop/index', $data);
