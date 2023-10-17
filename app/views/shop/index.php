@@ -9,11 +9,13 @@
                     <div class="row">
                 <?php endif; ?>
 
-                    <div class="col-sm-3">
+                    <div class="card pt-2 col-sm-3">
                         <img src="img/<?= $value->image ?>"
                              class="img-responsive" width="100%"
                              alt="<?= $value->name ?>"
-                        ></div>
+                        >
+                        <a href="shop/show/<?= $value->id ?>"><p><?= $value->name ?></p></a>
+                    </div>
 
                 <?php if ($key%4 == 3): ?>
                     </div>

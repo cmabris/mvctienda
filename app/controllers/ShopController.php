@@ -36,4 +36,9 @@ class ShopController extends Controller
         $session->logout();
         header('location:' . ROOT);
     }
+
+    public function show($id)
+    {
+        echo $id;
+    }
 }
