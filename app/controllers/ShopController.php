@@ -16,12 +16,15 @@ class ShopController extends Controller
         if ($session->getLogin()) {
 
             $mostSold = $this->model->getMostSold();
+            $news = $this->model->getNews();
 
             $data = [
                 'title' => 'Bienvenid@ a nuestra exclusiva tienda de productos',
                 'menu' => true,
-                'subtitle' => 'Bienvenid@ a nuestra tienda',
+                'subtitle' => 'Artículos más vendidos',
+                'subtitle2' => 'Artículos nuevos',
                 'data' => $mostSold,
+                'news' => $news,
             ];
 
             $this->view('shop/index', $data);

@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a href="<?= ROOT ?>index.php" class="navbar-brand">Tienda</a>
+    <a href="<?= ROOT ?>shop" class="navbar-brand">Tienda</a>
     <div class="collapse navbar-collapse" id="menu">
         <?php if ($data['menu']): ?>
             <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
