@@ -1,3 +1,27 @@
 <?php include_once (dirname(__DIR__). ROOT . 'header.php') ?>
-    Mi texto
+    <div class="card p-4 bg-light">
+        <div class="card-header">
+            <h1 class="text-center"><?= $data['subtitle'] ?></h1>
+        </div>
+        <div class="card-body">
+            <?php foreach($data['data'] as $key => $value): ?>
+                <?php if ($key%4 == 0): ?>
+                    <div class="row">
+                <?php endif; ?>
+
+                    <div class="col-sm-3">
+                        <img src="img/<?= $value->image ?>"
+                             class="img-responsive" width="100%"
+                             alt="<?= $value->name ?>"
+                        ></div>
+
+                <?php if ($key%4 == 3): ?>
+                    </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <div class="card-footer">
+
+        </div>
+    </div>
 <?php include_once (dirname(__DIR__). ROOT . 'footer.php') ?>
