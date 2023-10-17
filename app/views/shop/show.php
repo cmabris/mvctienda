@@ -22,4 +22,5 @@
     <h4>Resumen</h4>
     <?= html_entity_decode($data['data']->description) ?>
 <?php endif; ?>
+    <a href="<?= ROOT . (!empty($data['back']) ? $data['back'] : 'shop') ?>" class="btn btn-success">Volver a la tienda</a>
 <?php include_once (VIEWS . 'footer.php') ?>
