@@ -37,7 +37,7 @@
             <tr>
                 <td style="width: 79.85%"></td>
                 <td style="width: 11.95%">Subtotal:</td>
-                <td style="width: 9.20%"><?= number_format($subtotal,2) ?> &euro;/td>
+                <td style="width: 9.20%"><?= number_format($subtotal,2) ?> &euro;</td>
             </tr>
             <tr>
                 <td style="width: 79.85%"></td>
@@ -52,7 +52,7 @@
             <tr>
                 <td style="width: 79.85%"></td>
                 <td style="width: 11.95%">Total:</td>
-                <td style="width: 9.20%"><?= number_format(%$total,2) ?> &euro;</td>
+                <td style="width: 9.20%"><?= number_format($total,2) ?> &euro;</td>
             </tr>
             <tr>
                 <td>
