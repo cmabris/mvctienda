@@ -13,8 +13,10 @@ class Session
         if ( isset($_SESSION['user'])) {
             $this->user = $_SESSION['user'];
             $this->login = true;
-            $_SESSION['cartTotal'] = $this->cartTotal();
-            $this->cartTotal = $_SESSION['cartTotal'];
+            if (isset($this->user->id)) {
+                $_SESSION['cartTotal'] = $this->cartTotal();
+                $this->cartTotal = $_SESSION['cartTotal'];
+            }
         } else {
             unset($this->user);
             $this->login = false;
