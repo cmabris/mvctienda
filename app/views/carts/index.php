@@ -20,6 +20,7 @@
                     <td><b><?= $value->name ?></b> <?= substr(html_entity_decode($value->description), 0, 200) ?>...</td>
                     <td class="text-right">
                         <input type="number" name="c<?= $key ?>" class="text-right" value="<?= number_format($value->quantity, 0) ?>" min="1" max="99">
+                        <input type="hidden" name="i<?= $key ?>" value="<?= $value->product ?>">
                     </td>
                     <td class="text-right"><?= number_format($value->price, 2) ?> &euro;</td>
                     <td class="text-right"><?= number_format($value->price * $value->quantity, 2) ?> &euro;</td>

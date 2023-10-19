@@ -64,4 +64,18 @@ class Cart
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function update($user_id, $product_id, $quantity)
+    {
+        $sql = 'UPDATE carts SET quantity=:quantity WHERE user_id=:user_id AND product_id=:product_id';
+
+        $query = $this->db->prepare($sql);
+        $params = [
+            ':user_id' => $user_id,
+            ':product_id' => $product_id,
+            ':quantity' => $quantity,
+        ];
+
+        return $query->execute($params);
+    }
 }
