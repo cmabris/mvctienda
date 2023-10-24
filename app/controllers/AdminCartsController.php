@@ -11,6 +11,14 @@ class AdminCartsController extends Controller
 
     public function sales()
     {
-        $data = $this->model->sales();
+        $sales = $this->model->sales();
+
+        $data = [
+            'title' => 'Ventas',
+            'menu' => false,
+            'admin' => true,
+            'data' => $sales,
+        ];
+        $this->view('admin/carts/index', $data);
     }
 }
