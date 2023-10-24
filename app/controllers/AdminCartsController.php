@@ -31,6 +31,7 @@ class AdminCartsController extends Controller
             'menu' => false,
             'admin' => true,
             'data' => $cart,
+            'date' => $date,
         ];
         $this->view('admin/carts/show', $data);
     }
