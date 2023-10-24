@@ -23,7 +23,7 @@
                 <td class="text-right"><?= number_format($sale->discount, 2) ?></td>
                 <td class="text-right"><?= number_format($sale->send, 2) ?></td>
                 <td class="text-right"><?= number_format($sale->cost - $sale->discount + $sale->send, 2) ?></td>
-                <td><a href="<?= ROOT ?>admincart/show/<?= substr($sale->date, 0, 10) ?>/<?= $sale->user_id ?>" class="btn btn-info">Detalle</a></td>
+                <td><a href="<?= ROOT ?>admincarts/show/<?= substr($sale->date, 0, 10) ?>/<?= $sale->user_id ?>" class="btn btn-info">Detalle</a></td>
             </tr>
                 <?php $cost+=$sale->cost; $discount+=$sale->discount; $send+=$sale->send; $total+=$sale->cost - $sale->discount + $sale->send ?>
             <?php endforeach ?>
